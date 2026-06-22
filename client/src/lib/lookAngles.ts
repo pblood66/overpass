@@ -3,7 +3,7 @@ import { degreesToRadians, radiansToDegrees, ecfToLookAngles, eciToEcf, gstime, 
 export interface LookAngles {
     elevation: number,
     azimuth: number, 
-    range: number
+    rangeSat: number
 }
 
 export interface ObserverLocation {
@@ -31,7 +31,7 @@ export const getLookAngles = (satRec: SatRec, observer: ObserverLocation, date: 
     return {
         elevation: radiansToDegrees(angles.elevation),
         azimuth: radiansToDegrees(angles.azimuth),
-        range: angles.rangeSat
+        rangeSat: angles.rangeSat
     }
 }
 

@@ -1,12 +1,12 @@
 import { degreesLat, degreesLong, eciToGeodetic, gstime, propagate, type SatRec } from "satellite.js"
 
-export interface SatelitePosition {
+export interface SatellitePosition {
     lat: number,
     lng: number,
     alt: number
 }
 
-export const getPostion = (satRec: SatRec, date: Date = new Date()): SatelitePosition | null => {
+export const getPosition = (satRec: SatRec, date: Date = new Date()): SatellitePosition | null => {
     const state = propagate(satRec, date);
 
     if (!state || !state.position || typeof state.position === 'boolean') return null;
