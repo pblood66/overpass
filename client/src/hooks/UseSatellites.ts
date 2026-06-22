@@ -6,7 +6,7 @@ export interface SatelliteState {
     error: string | null,
     loading: boolean
 } 
-export const UseSatelllites = (source: string) => {
+export const UseSatellites = (source: string) => {
     const [state, setState] = useState<SatelliteState>({
         satellites: [],
         error: null,
