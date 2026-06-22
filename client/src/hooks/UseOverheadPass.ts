@@ -4,7 +4,7 @@ import type { OverheadPass } from "../types/satellite"
 import { getLookAngles, type ObserverLocation } from "../lib/lookAngles"
 import { getPosition } from "../lib/propagate"
 
-const MIN_ELEVATION_DEG = 10;
+const MIN_ELEVATION_DEG = 50;
 const REFRESH_INTERVAL = 5000;
 
 export const useOverheadPass = (satellites: TLERecord[], observer: ObserverLocation | null) : OverheadPass[] => {

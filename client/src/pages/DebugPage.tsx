@@ -1,13 +1,18 @@
-import './App.css'
-import { SatelliteList } from './components/SatelliteList';
-import { useOverheadPass } from './hooks/UseOverheadPass';
-import { usePosition } from './hooks/UsePosition';
-import { useSatellites } from './hooks/UseSatellites';
+import { SatelliteList } from "../components/SatelliteList";
+import { type PositionState } from "../hooks/UsePosition";
+import { type SatelliteState } from "../hooks/UseSatellites";
+import type { OverheadPass } from "../types/satellite";
 
-function App() {
-    const { location, error: locationError, loading: locationLoading } = usePosition();
-    const { satellites, error: satError, loading: satLoading } = useSatellites("/data/sat-data.txt");
-    const passes = useOverheadPass(satellites, location);
+export interface DebugProps {
+    position: PositionState,
+    satellites: SatelliteState,
+    overheadPasses: OverheadPass[]
+}
+
+export const DebugPage = (props: DebugProps) => {
+    const { location, error: locationError, loading: locationLoading } = props.position;
+    const { satellites, error: satError, loading: satLoading } = props.satellites;
+    const passes = props.overheadPasses;
 
     return (
         <div className="app">
@@ -54,5 +59,3 @@ function App() {
         </div>
     );
 }
-
-export default App
