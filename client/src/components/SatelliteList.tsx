@@ -20,10 +20,10 @@ export const SatelliteList = ({ passes }: SatelliteListProps) => {
                 <li key={pass.name}> 
                     <div>{pass.name}</div>
                     <div>
-                        <span>Elevation: {pass.elevation.toFixed(1)}°</span>
-                        <span>Azimuth: {pass.azimuth.toFixed(1)}°</span>
-                        <span>Altitude: {pass.alt.toFixed(1)} km</span>
-                        <span>Range: {pass.rangeSat.toFixed(1)} km</span>
+                        <span>Elevation: {pass.elevation.toFixed(1)}° </span>
+                        <span>Azimuth: {pass.azimuth.toFixed(1)}° </span>
+                        <span>Altitude: {pass.alt.toFixed(1)} km </span>
+                        <span>Range: {pass.rangeSat.toFixed(1)} km </span>
                     </div>
                     <div>
                         {pass.lat.toFixed(3)}°, {pass.lng.toFixed(3)}°

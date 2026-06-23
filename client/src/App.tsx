@@ -1,57 +1,23 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css'
-import { SatelliteList } from './components/SatelliteList';
-import { useOverheadPass } from './hooks/UseOverheadPass';
-import { usePosition } from './hooks/UsePosition';
-import { useSatellites } from './hooks/UseSatellites';
+import { DebugPage } from './pages/DebugPage';
+import { usePosition, type PositionState } from './hooks/usePosition';
+import { useOverheadPass } from './hooks/useOverheadPass';
+import { useSatellites, type SatelliteState } from './hooks/useSatellites';
+import type { OverheadPass } from './types/satellite';
 
 function App() {
-    const { location, error: locationError, loading: locationLoading } = usePosition();
-    const { satellites, error: satError, loading: satLoading } = useSatellites("/data/sat-data.txt");
-    const passes = useOverheadPass(satellites, location);
+    const position: PositionState = usePosition();
+    const satellites: SatelliteState = useSatellites("/data/sat-data.txt");
+    const passes: OverheadPass[] = useOverheadPass(satellites.satellites, position.location);
 
     return (
-        <div className="app">
-            <header>
-                <h1>Debug</h1>
-            </header>
-
-            <main>
-                <section>
-                    <div>
-                        <span>Your Location: </span>
-                        {locationLoading && <span>Requesting GPS...</span>}
-                        {locationError && <span className="status-value error">{locationError}</span>}
-                        {location && (
-                            <span className="status-value">
-                                {location.lat.toFixed(4)}°, {location.lng.toFixed(4)}° @ {location.alt}km
-                            </span>
-                        )}
-                    </div>
-
-                    <div>
-                        <span>TLE Data: </span>
-                        {satLoading && <span>Loading...</span>}
-                        {satError && <span>{satError}</span>}
-                        {!satLoading && !satError && (
-                            <span>{satellites.length} Satellites Loaded</span>
-                        )}
-                    </div>
-
-                    <div>
-                        <span>Overhead Now: </span>
-                        <span> {passes.length} satellites</span>
-                    </div>
-                </section>
-
-                <section>
-                    <h2>Satellites Above 50° elevation</h2>
-                    {!location && !locationLoading && (
-                        <p>Enable location access to detect overhead satellites.</p>
-                    )}
-                    {location && <SatelliteList passes={passes} />}
-                </section>
-            </main>
-        </div>
+        <>
+            <Routes>
+                <Route path="/" element={<p>Hello World</p>} />
+                <Route path="/debug" element={ <DebugPage position={position} satellites={satellites} overheadPasses={passes}  /> }/>
+            </Routes>
+        </>
     );
 }
 

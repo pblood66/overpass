@@ -1,6 +1,6 @@
 import { SatelliteList } from "../components/SatelliteList";
-import { type PositionState } from "../hooks/UsePosition";
-import { type SatelliteState } from "../hooks/UseSatellites";
+import type { PositionState } from "../hooks/usePosition";
+import type { SatelliteState } from "../hooks/useSatellites";
 import type { OverheadPass } from "../types/satellite";
 
 export interface DebugProps {
