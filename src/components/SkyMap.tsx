@@ -157,7 +157,7 @@ export const SkyMap = ({ passes, showNames = false }: SkyMapProps) => {
         const rect = canvas.getBoundingClientRect();
         const mx = e.clientX - rect.left;
         const my = e.clientY - rect.top;
-
+        // console.log(`rect: ${rect.right}`)
         let found: OverheadPass | null = null;
         for (const pass of passes) {
             const [x, y] = toXY(pass.elevation, pass.azimuth);
@@ -168,7 +168,12 @@ export const SkyMap = ({ passes, showNames = false }: SkyMapProps) => {
             }
         }
         setHovered(found);
-        setTooltip({ x: e.clientX - rect.left + 12, y: e.clientY - rect.top - 12 });
+        // console.log(`Client: (${e.clientX}, ${e.clientY})`)
+        const x = e.clientX + 17;
+        const y = e.clientY + 17;
+        // console.log(`Tip: (${x}, ${y})`)
+
+        setTooltip({ x: x, y: y });
     }
 
     return (
@@ -200,8 +205,6 @@ export const SkyMap = ({ passes, showNames = false }: SkyMapProps) => {
                     </div>
                 </div>
             )}
-
-
         </div>
     )
 };
