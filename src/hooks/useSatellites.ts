@@ -13,6 +13,8 @@ export const useSatellites = (source: string) => {
         loading: true
     }) 
 
+    console.log(`Fetching Satellite Data from ${source}`);
+
     useEffect(() => {
         setState(s => ({ ...s, loading: true }));
 
